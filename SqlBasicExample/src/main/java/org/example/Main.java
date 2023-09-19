@@ -44,6 +44,10 @@ public class Main {
             ResultSet resultSet = selectStatement.executeQuery();
             studentsList = new ArrayList<>(); // gösterilecek veriler liste şeklinde tutulur.
 
+
+
+
+
             while (resultSet.next()) /*bir sonraki satır olduğu sürece çalışır. */ {
                 // Sonuçları işleme
                 String studentsName = resultSet.getString("studentsName");
@@ -52,6 +56,28 @@ public class Main {
                 Students students = new Students(studentsName, studentsNumber, studentsGrade);
                 studentsList.add(students);
                 System.out.println("studentsName: " + studentsName + ", studentsGrade: " + studentsGrade);
+
+
+            }
+
+
+            String query = "SELECT * FROM students WHERE student_number = ?"; // istenilen numarayı databasede sorgulamak için.
+            PreparedStatement statement = conn.prepareStatement(query);
+            System.out.println("Notunu görmek istediğiniz numarayı giriniz: ");
+            int qNumber = Integer.parseInt(entry.next());
+            statement.setInt(2, qNumber);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()){
+
+                String studentsName = resultSet.getString("studentsName");
+                int studentsGrade = resultSet.getInt("studentsGrade");
+
+                System.out.println("studentsName: " + studentsName + ", studentsGrade: " + studentsGrade);
+
+            }
+            else {
+                System.out.println("Öğrenci bulunamadı.");
             }
 
             // Bağlantıyı kapatma
