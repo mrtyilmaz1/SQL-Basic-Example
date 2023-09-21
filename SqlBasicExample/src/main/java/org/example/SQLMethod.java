@@ -67,7 +67,7 @@ public class SQLMethod {
             conn = getConnection();
             String query = "SELECT * FROM students WHERE studentsnumber = ?"; // istenilen numarayı databasede sorgulamak için.
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(2, number);
+            statement.setInt(1, number);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
                 String studentsName = resultSet.getString("studentsname");
