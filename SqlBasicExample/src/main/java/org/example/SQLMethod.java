@@ -24,7 +24,7 @@ public class SQLMethod {
     public static void insertData(String studentsName, int studentsNumber, int studentsGrade) {
         try {
             conn = getConnection();
-            String insertSQL = "INSERT INTO students (studentsName, studentsNumber, studentsGrade) VALUES (?, ?, ?)";
+            String insertSQL = "INSERT INTO students (studentsname, studentsnumber, studentsgrade) VALUES (?, ?, ?)";
             // ? sembolleri, daha sonra parametrelerle değiştirilecek olan yer tutuculardır.
             PreparedStatement insertStatement = conn.prepareStatement(insertSQL); // SQL'e eklemek için gerekli değişkeni tanımladık.
             insertStatement.setString(1, studentsName);
@@ -49,12 +49,12 @@ public class SQLMethod {
             studentsList = new ArrayList<>(); // gösterilecek veriler liste şeklinde tutulur.
                     while (resultSet.next()) /*bir sonraki satır olduğu sürece çalışır. */ {
                         // Sonuçları işleme
-                        String studentsName = resultSet.getString("studentsName");
-                        int studentsNumber = resultSet.getInt("studentsNumber");
-                        int studentsGrade = resultSet.getInt("studentsGrade");
+                        String studentsName = resultSet.getString("studentsname");
+                        int studentsNumber = resultSet.getInt("studentsnumber");
+                        int studentsGrade = resultSet.getInt("studentsgrade");
                         Students students = new Students(studentsName, studentsNumber, studentsGrade);
                         studentsList.add(students);
-                        System.out.println("studentsName: " + studentsName + ", studentsGrade: " + studentsGrade);
+                        System.out.println("studentsname: " + studentsName + ", studentsgrade: " + studentsGrade);
                     }
             conn.close();
         } catch (SQLException e) {
@@ -65,14 +65,14 @@ public class SQLMethod {
 
         try{
             conn = getConnection();
-            String query = "SELECT * FROM students WHERE student_number = ?"; // istenilen numarayı databasede sorgulamak için.
+            String query = "SELECT * FROM students WHERE studentsnumber = ?"; // istenilen numarayı databasede sorgulamak için.
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setInt(2, number);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
-                String studentsName = resultSet.getString("studentsName");
-                int studentsGrade = resultSet.getInt("studentsGrade");
-                System.out.println("studentsName: " + studentsName + ", studentsGrade: " + studentsGrade);
+                String studentsName = resultSet.getString("studentsname");
+                int studentsGrade = resultSet.getInt("studentsgrade");
+                System.out.println("studentsname: " + studentsName + ", studentsgrade: " + studentsGrade);
             }
             else {
                 System.out.println("Öğrenci bulunamadı.");

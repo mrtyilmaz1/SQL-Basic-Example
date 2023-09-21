@@ -14,13 +14,13 @@ public class Main {
 
         Scanner entry = new Scanner(System.in);
         System.out.println("İsim: ");
-        String sName = entry.next();
+        String studentsName = entry.next();
         System.out.println("Numara: ");
-        int sNumber = Integer.parseInt(entry.next());
+        int studentsNumber = Integer.parseInt(entry.next());
         System.out.println("Puan: ");
-        int sGrade = Integer.parseInt(entry.next());
+        int studentsGrade = Integer.parseInt(entry.next());
 
-        Students insertStudent = new Students(sName,sNumber,sGrade);
+        Students insertStudent = new Students(studentsName,studentsNumber,studentsGrade);
 
         SQLMethod.getConnection();
         SQLMethod.insertData(insertStudent.getStudentsName(),
